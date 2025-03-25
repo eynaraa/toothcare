@@ -1,0 +1,180 @@
+﻿@using Toothcare_Appointment_System.Models
+
+
+@if (Model is IEnumerable<Staff> && User.IsInRole("Admin")) // Admin access
+{
+    IEnumerable<Staff> StaffList = (IEnumerable<Staff>)Model;
+
+    <ul class="nav nav-tabs nav-fill">
+        <li class="nav-item">
+            <a class="nav-link active"><i class="bi bi-people"></i> Staff</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-action="Index" asp-controller="Doctors"><i class="bi bi-heart-pulse"></i> Doctors</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-action="Index" asp-controller="Appointments"><i class="bi bi-calendar-check"></i> Appointments</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-action="Index" asp-controller="Patients"><i class="bi bi-person-lines-fill"></i> Patients</a>
+        </li>
+    </ul>
+
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center">
+            <h2 class="text-primary">
+                <i class="bi bi-people"></i> Staff List
+            </h2>
+            <a asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-person-plus"></i> Add Staff
+            </a>
+        </div>
+
+
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="table-primary">
+                    <tr>
+                        <th><i class="bi bi-hash"></i> Staff ID</th>
+                        <th><i class="bi bi-person"></i> Name</th>
+                        <th><i class="bi bi-telephone"></i> Phone</th>
+                        <th><i class="bi bi-briefcase"></i> Role</th>
+                        <th><i class="bi bi-envelope"></i> Email</th>
+                        <th><i class="bi bi-gear"></i> Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var staff in StaffList)
+                    {
+                        <tr>
+                            <td>STF@(@staff.StaffID)</td>
+                            <td>@staff.StaffName</td>
+                            <td>@staff.StaffPhoneNo</td>
+                            <td>@staff.StaffRole</td>
+                            <td>@staff.StaffEmail</td>
+                            <td>
+                                <a asp-action="View" asp-route-id="@staff.StaffID" class="btn btn-sm btn-info"><i class="bi bi-eye"></i></a>
+                                <a asp-action="Edit" asp-route-id="@staff.StaffID" class="btn btn-sm btn-warning"><i class="bi bi-pencil"></i></a>
+                                <a asp-action="Delete" asp-route-id="@staff.StaffID" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+else if (Model is IEnumerable<AppointmentDTO>) // Staff access
+{
+    IEnumerable<AppointmentDTO> Appointments = (IEnumerable<AppointmentDTO>)Model;
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link active"><i class="bi bi-calendar-check"></i> Appointments</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-action="Index" asp-controller="Patients"><i class="bi bi-person-lines-fill"></i> Patients</a>
+        </li>
+    </ul>
+
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center">
+            <h2 class="text-primary mb-0">
+                <i class="bi bi-calendar-check"></i> Appointment List
+            </h2>
+            <a asp-action="Create" asp-controller="Appointments" class="btn btn-primary w-15">
+                <i class="bi bi-plus"></i> Create
+            </a>
+        </div>
+
+
+
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="table-primary">
+                    <tr>
+                        <th><i class="bi bi-clock"></i> Schedule</th>
+                        <th><i class="bi bi-journal-medical"></i> Reason</th>
+                        <th><i class="bi bi-info-circle"></i> Status</th>
+                        <th><i class="bi bi-sticky"></i> Notes</th>
+                        <th><i class="bi bi-door-open"></i> Room</th>
+                        <th><i class="bi bi-ui-checks-grid"></i> Type</th>
+                        <th><i class="bi bi-gear"></i> Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var appointment in Appointments)
+                    {
+                        <tr>
+                            <td>@appointment.AppointmentDateTime.ToShortDateString()</td>
+                            <td>@appointment.AppointmentReason</td>
+                            <td>@appointment.AppointmentStatus</td>
+                            <td>@appointment.AppointmentNotes</td>
+                            <td>@appointment.RoomNumber</td>
+                            <td>@appointment.AppointmentType</td>
+                            <td>
+                                <a asp-controller="Appointments" asp-action="View" asp-route-id="@appointment.AppointmentID" class="btn btn-sm btn-info"><i class="bi bi-eye"></i></a>
+                                <a asp-controller="Appointments" asp-action="Edit" asp-route-id="@appointment.AppointmentID" class="btn btn-sm btn-warning"><i class="bi bi-pencil"></i></a>
+                                <a asp-controller="Appointments" asp-action="Delete" asp-route-id="@appointment.AppointmentID" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+else
+{
+    <h1 class="text-danger">Invalid Data Type: @(Model?.GetType())</h1>
+}
+
+<style>
+    body {
+        background: url('/images/dental4-bg.jpg') no-repeat center center fixed;
+        background-size: cover;
+    }
+
+    .table {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+        .table th {
+            text-align: center;
+        }
+
+        .table td {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+    .btn-sm {
+        width: 36px;
+        height: 36px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+    }
+
+        .btn-sm i {
+            font-size: 16px;
+        }
+
+    .nav-tabs .nav-link {
+        font-weight: bold;
+        color: #0056b3;
+    }
+
+        .nav-tabs .nav-link.active {
+            background-color: #007bff;
+            color: white;
+        }
+
+    h2 {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+</style>
