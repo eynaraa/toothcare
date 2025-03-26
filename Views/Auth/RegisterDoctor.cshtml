@@ -1,0 +1,92 @@
+﻿@model Toothcare_Appointment_System.Models.Doctors
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.0/dist/cosmo/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0 rounded-3">
+                <div class="card-body p-4">
+                    <h2 class="text-center text-primary">
+                        <i class="bi bi-person-plus"></i> Register Doctor
+                    </h2>
+
+                    <form asp-controller="Auth" asp-action="RegisterDoctor" method="post">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="DoctorName" class="form-label">Name</label>
+                                <input asp-for="DoctorName" class="form-control" maxlength="250" placeholder="Enter full name" required />
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="DoctorPhoneNo" class="form-label">Phone</label>
+                                <input asp-for="DoctorPhoneNo" class="form-control" type="tel" placeholder="Enter phone number" required />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="DoctorEmail" class="form-label">Email</label>
+                                <input asp-for="DoctorEmail" class="form-control" type="email" placeholder="Enter email" required />
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="DoctorLicenseNumber" class="form-label">License Number</label>
+                                <input asp-for="DoctorLicenseNumber" class="form-control" placeholder="Enter license number" required />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="DoctorAvailability" class="form-label">Availability</label>
+                                <input asp-for="DoctorAvailability" class="form-control" placeholder="Enter availability" required />
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="DoctorAddress" class="form-label">Address</label>
+                                <textarea asp-for="DoctorAddress" class="form-control" placeholder="Enter address" required></textarea>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Password</label>
+                                <input type="password" class="form-control" placeholder="Enter password" required />
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="DoctorPass" class="form-label">Confirm Password</label>
+                                <input asp-for="DoctorPass" class="form-control" type="password" placeholder="Confirm password" required />
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-center gap-3 mt-3">
+                            <button type="submit" class="btn btn-primary w-50">Create</button>
+                            <a asp-controller="Auth" asp-action="Login" class="btn btn-secondary w-50">Cancel</a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .form-control {
+        border-radius: 50px;
+        border: 1.5px solid #007bff;
+        padding: 10px 15px;
+    }
+
+        .form-control::placeholder {
+            color: #6c757d;
+            opacity: 1;
+        }
+
+    body {
+        background: url('/images/dental4-bg.jpg') no-repeat center center fixed;
+        background-size: cover;
+    }
+</style>

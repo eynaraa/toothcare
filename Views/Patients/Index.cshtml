@@ -1,0 +1,104 @@
+﻿@model IEnumerable<Toothcare_Appointment_System.Models.Patients>
+@if (User.IsInRole("Admin"))
+{
+	<ul class="nav nav-tabs nav-fill">
+		<li class="nav-item">
+			<a class="nav-link" asp-action="index" asp-controller="Staff">Staff</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" asp-action="index" asp-controller="Doctors">Doctor</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" asp-action="index" asp-controller="Appointments">Appointment</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link active" aria-current="page">Patient</a>
+		</li>
+	</ul>
+    <div class="d-flex justify-content-between align-items-center">
+        <h2 class="text-primary mb-0">
+            <i class="bi bi-calendar-check"></i> Patients
+        </h2>
+        <a asp-action="Create" asp-controller="Patients" class="btn btn-primary w-15">
+            <i class="bi bi-plus"></i> Create
+        </a>
+    </div>
+}
+else
+{
+	<ul class="nav nav-tabs">
+		<li class="nav-item">
+			<a class="nav-link" asp-action="index" asp-controller="Staff">Appointment</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link active" aria-current="page">Patient</a>
+		</li>
+	</ul>
+	<div class="d-flex justify-content-between align-items-center">
+            <h2 class="text-primary mb-0">
+                <i class="bi bi-calendar-check"></i> Patient List
+            </h2>
+            <a asp-action="Create" asp-controller="Patients" class="btn btn-primary w-15">
+                <i class="bi bi-plus"></i> Create
+            </a>
+        </div>
+}
+<div class="table-responsive mt-3">
+    <table class="table table-hover align-middle shadow-sm">
+        <thead class="table-primary">
+            <tr>
+                <th><i class="bi bi-person"></i> Name</th>
+                <th><i class="bi bi-telephone"></i> Phone</th>
+                <th><i class="bi bi-envelope"></i> Email</th>
+                <th><i class="bi bi-calendar-date"></i> DOB</th>
+                <th><i class="bi bi-geo-alt"></i> Address</th>
+                <th><i class="bi bi-gender-ambiguous"></i> Gender</th>
+                <th class="text-center"><i class="bi bi-gear"></i> Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var patient in Model)
+            {
+                <tr>
+                    <td>@patient.PatientName</td>
+                    <td>@patient.PatientPhoneNo</td>
+                    <td>@patient.PatientEmail</td>
+                    <td>@patient.PatientDOB.ToShortDateString()</td>
+                    <td>@patient.PatientAddress</td>
+                    <td>@patient.PatientGender</td>
+                    <td class="text-center">
+                        <a asp-action="View" asp-route-id="@patient.ICNumber" class="btn btn-info btn-sm me-1">
+                            <i class="bi bi-eye"></i> View
+                        </a>
+                        <a asp-action="Edit" asp-route-id="@patient.ICNumber" class="btn btn-warning btn-sm me-1">
+                            <i class="bi bi-pencil"></i> Edit
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@patient.ICNumber" class="btn btn-danger btn-sm">
+                            <i class="bi bi-trash"></i> Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<style>
+    body {
+        background: url('/images/dental1-bg.jpg') no-repeat center center fixed;
+        background-size: cover;
+    }
+
+    
+
+
+    .nav-tabs .nav-link {
+        font-weight: bold;
+        color: #0056b3;
+    }
+
+        .nav-tabs .nav-link.active {
+            background-color: #007bff;
+            color: white;
+        }
+</style>

@@ -1,0 +1,142 @@
+﻿@model Toothcare_Appointment_System.Models.AppointmentDTO
+
+<h2 class="text-primary fw-bold text-center mt-5">
+    <i class="fas fa-tooth"></i> Create New Appointment
+</h2>
+
+<div class="appointment-container p-4">
+    <form asp-action="Create" method="post">
+        <!-- Appointment Date -->
+        <div class="mb-3 input-group">
+            <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+            <input asp-for="AppointmentDateTime" class="form-control rounded-end" type="date" placeholder="Select Date" />
+        </div>
+
+        <!-- Appointment Reason -->
+        <div class="mb-3 input-group">
+            <span class="input-group-text"><i class="fas fa-comment-medical"></i></span>
+            <textarea asp-for="AppointmentReason" class="form-control rounded-end" placeholder="Enter reason"></textarea>
+        </div>
+
+        <!-- Appointment Status -->
+        <div class="mb-3 input-group">
+            <span class="input-group-text"><i class="fas fa-tasks"></i></span>
+            <select asp-for="AppointmentStatus" class="form-select rounded-end">
+                <option value="Scheduled">Scheduled</option>
+                <option value="Confirmed">Confirmed</option>
+                <option value="Cancelled">Cancelled</option>
+                <option value="Completed">Completed</option>
+            </select>
+        </div>
+
+        <!-- Select Doctor -->
+        <div class="mb-3 input-group">
+            <span class="input-group-text"><i class="fas fa-user-md"></i></span>
+            <select asp-for="DoctorID" class="form-select rounded-end">
+                @foreach (var doctor in (List<Toothcare_Appointment_System.Models.Doctors>)ViewData["Doctors"])
+                {
+                    <option value="@doctor.DoctorID">@doctor.DoctorName</option>
+                }
+            </select>
+        </div>
+
+        <!-- Search Patient -->
+        <div class="mb-3 input-group">
+            <span class="input-group-text"><i class="fas fa-search"></i></span>
+            <input id="filterPatient" onkeyup="updatePatient()" class="form-control rounded-end" placeholder="Search for patient" />
+        </div>
+
+        <!-- Select Patient -->
+        <div class="mb-3 input-group">
+            <span class="input-group-text"><i class="fas fa-user-injured"></i></span>
+            <select asp-for="ICNumber" class="form-select rounded-end">
+                @foreach (var patient in (List<Toothcare_Appointment_System.Models.Patients>)ViewData["Patients"])
+                {
+                    <option value="@patient.ICNumber">@patient.PatientName</option>
+                }
+            </select>
+        </div>
+
+        <!-- Appointment Type -->
+        <div class="mb-3 input-group">
+            <span class="input-group-text"><i class="fas fa-notes-medical"></i></span>
+            <input asp-for="AppointmentType" class="form-control rounded-end" placeholder="Enter type" />
+        </div>
+
+        <!-- Submit & Cancel Buttons -->
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary rounded-pill px-4">
+                <i class="fas fa-check-circle"></i> Create
+            </button>
+            <a asp-action="Index" asp-controller="Staff" class="btn btn-outline-primary rounded-pill px-4">
+                <i class="fas fa-times-circle"></i> Cancel
+            </a>
+        </div>
+    </form>
+</div>
+
+<script>
+    function updatePatient() {
+        var input, filter, option, i;
+        input = document.getElementById("filterPatient");
+        filter = input.value.toUpperCase();
+        option = document.getElementsByTagName("option");
+        for (i = 0; i < option.length; i++) {
+            if (option[i].innerHTML.toUpperCase().indexOf(filter) > -1 || option[i].value.indexOf(filter) > -1) {
+                option[i].style.display = "";
+            } else {
+                option[i].style.display = "none";
+            }
+        }
+    }
+</script>
+
+<!-- Styling -->
+<style>
+    .appointment-container {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 4px 4px 12px rgba(0, 100, 255, 0.15);
+        max-width: 600px;
+        margin: auto;
+    }
+
+    .form-control, .form-select {
+        border: 2px solid #007bff;
+        transition: 0.3s ease-in-out;
+    }
+
+        .form-control:focus, .form-select:focus {
+            box-shadow: 0 0 8px rgba(0, 100, 255, 0.5);
+            border-color: #0056b3;
+        }
+
+    .input-group-text {
+        background: #007bff;
+        color: white;
+        border-radius: 20px 0 0 20px;
+        border: none;
+    }
+
+    .btn-primary {
+        background: #007bff;
+        border: none;
+    }
+
+        .btn-primary:hover {
+            background: #0056b3;
+        }
+
+    .btn-outline-primary:hover {
+        background: #007bff;
+        color: white;
+    }
+
+    body {
+        background: url('/images/dental1-bg.jpg') no-repeat center center fixed;
+        background-size: cover;
+    }
+</style>
+
+<!-- FontAwesome for Icons -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>

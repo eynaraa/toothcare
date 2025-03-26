@@ -1,0 +1,65 @@
+﻿@model Toothcare_Appointment_System.Models.Appointment
+
+<h2 class="text-primary text-center"><i class="fas fa-calendar-alt"></i> Appointment Details</h2>
+
+<div class="appointment-container p-4">
+    <dl class="row">
+        <dt class="col-sm-3"><i class="fas fa-calendar-day"></i> Date</dt>
+        <dd class="col-sm-9">@Model.AppointmentDateTime.ToShortDateString()</dd>
+
+        <dt class="col-sm-3"><i class="fas fa-sticky-note"></i> Reason</dt>
+        <dd class="col-sm-9">@Model.AppointmentReason</dd>
+
+        <dt class="col-sm-3"><i class="fas fa-info-circle"></i> Status</dt>
+        <dd class="col-sm-9">@Model.AppointmentStatus</dd>
+
+        <dt class="col-sm-3"><i class="fas fa-list-alt"></i> Type</dt>
+        <dd class="col-sm-9">@Model.AppointmentType</dd>
+    </dl>
+
+    <div class="text-center">
+        <a asp-action="Index" asp-controller="Staff" class="btn btn-outline-primary rounded-pill px-4">
+            <i class="fas fa-arrow-left"></i> Back
+        </a>
+    </div>
+</div>
+
+<style>
+    .appointment-container {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 4px 4px 12px rgba(0, 100, 255, 0.15);
+        max-width: 600px;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #a6c9e2;
+    }
+
+    dt {
+        font-weight: bold;
+        color: #007bff;
+    }
+
+    dd {
+        padding-left: 10px;
+    }
+
+    .btn-outline-primary {
+        border-radius: 20px;
+        padding: 10px 20px;
+        transition: all 0.3s;
+    }
+
+        .btn-outline-primary:hover {
+            background: #007bff;
+            color: white;
+        }
+
+    body {
+        background: url('/images/dental1-bg.jpg') no-repeat center center fixed;
+        background-size: cover;
+    }
+</style>
+
+<!-- Include FontAwesome for Icons -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>

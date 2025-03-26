@@ -1,0 +1,70 @@
+﻿@{
+    ViewData["Title"] = "Privacy";
+}
+
+<h2 class="text-primary text-center"><i class="fas fa-tooth"></i> About Toothcare Booking System</h2>
+
+<div class="about-container p-4">
+    <p class="lead text-center">
+        Welcome to <strong>Toothcare Booking System</strong>, your trusted platform for seamless dental appointment scheduling.
+    </p>
+
+    <div class="row mt-4">
+        <div class="col-md-6 text-center">
+            <i class="fas fa-hospital-user fa-4x text-info"></i>
+            <h4 class="mt-3">Our Mission</h4>
+            <p>
+                Our mission is to provide an easy and efficient way to book dental appointments, ensuring better oral health for everyone.
+            </p>
+        </div>
+        <div class="col-md-6 text-center">
+            <i class="fas fa-users fa-4x text-success"></i>
+            <h4 class="mt-3">Who We Are</h4>
+            <p>
+                We are a dedicated team committed to revolutionizing dental care by connecting patients with experienced dentists effortlessly.
+            </p>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-6 text-center">
+            <i class="fas fa-calendar-check fa-4x text-warning"></i>
+            <h4 class="mt-3">Easy Booking</h4>
+            <p>
+                Schedule your appointments online with just a few clicks, anytime, anywhere.
+            </p>
+        </div>
+        <div class="col-md-6 text-center">
+            <i class="fas fa-shield-alt fa-4x text-danger"></i>
+            <h4 class="mt-3">Your Privacy</h4>
+            <p>
+                We prioritize your data security, ensuring that all your information is safe and confidential.
+            </p>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a asp-action="Contact" class="btn btn-primary rounded-pill px-4">
+            <i class="fas fa-envelope"></i> Contact Us
+        </a>
+    </div>
+</div>
+
+<style>
+    .about-container {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 4px 4px 12px rgba(0, 100, 255, 0.15);
+        max-width: 800px;
+        margin: auto;
+        padding: 30px;
+    }
+
+    body {
+        background: url('/images/dental3-bg.jpg') no-repeat center center fixed;
+        background-size: cover;
+    }
+</style>
+
+<!-- Include FontAwesome for Icons -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
